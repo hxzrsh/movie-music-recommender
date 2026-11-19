@@ -136,12 +136,12 @@ div[data-testid="stToggle"] label p {{
     text-transform: uppercase !important;
     letter-spacing: 0.1em !important;
 }}
-div[data-testid="stToggle"] label > div[aria-checked="true"],
-div[data-testid="stToggle"] label:has(input:checked) > div:first-of-type {{
+div[data-testid="stToggle"] input:checked + div,
+div[data-testid="stToggle"] label[data-baseweb="checkbox"]:has(input:checked) > div:first-of-type {{
     background-color: #D199FF !important;
 }}
-div[data-testid="stToggle"] label > div[aria-checked="true"] > div,
-div[data-testid="stToggle"] label:has(input:checked) > div:first-of-type > div {{
+div[data-testid="stToggle"] input:checked + div > div,
+div[data-testid="stToggle"] label[data-baseweb="checkbox"]:has(input:checked) > div:first-of-type > div {{
     background-color: #181819 !important;
 }}
 
@@ -156,18 +156,26 @@ div[data-testid="stRadio"] label p {{
     letter-spacing: 0.1em !important;
     text-transform: uppercase !important;
 }}
-div[data-testid="stRadio"] label[data-baseweb="radio"]:has(input:checked) > div:first-child {{
+div[data-testid="stRadio"] input:checked + div,
+div[data-testid="stRadio"] label[data-baseweb="radio"]:has(input:checked) > div:first-of-type {{
     background-color: #D199FF !important;
     border-color: #D199FF !important;
 }}
-div[data-testid="stRadio"] label[data-baseweb="radio"]:has(input:checked) > div:first-child > div {{
+div[data-testid="stRadio"] input:checked + div > div,
+div[data-testid="stRadio"] label[data-baseweb="radio"]:has(input:checked) > div:first-of-type > div {{
     background-color: #181819 !important;
 }}
 
+div[data-testid="stSlider"] div[data-baseweb="slider"] > div > div[style*="255, 75, 75"] {{
+    filter: hue-rotate(272deg) brightness(1.25) !important;
+}}
+div[data-testid="stSlider"] div[data-baseweb="slider"] > div > div[style*="255, 75, 75"] div[role="slider"] {{
+    filter: hue-rotate(88deg) brightness(0.8) !important;
+}}
 div[data-testid="stSlider"] div[role="slider"] {{
     background-color: #D199FF !important;
     border-color: #D199FF !important;
-    box-shadow: 0 0 0 3px rgba(209, 153, 255, 0.22) !important;
+    box-shadow: 0 0 0 3px rgba(209, 153, 255, 0.25) !important;
 }}
 div[data-testid="stSlider"] div[data-testid="stThumbValue"] {{
     color: #D199FF !important;
