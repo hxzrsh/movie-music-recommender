@@ -767,4 +767,151 @@ def load_and_train_models():
         .reset_index(drop=True)
     )
 
-    def build_song
+    def build_song_tags(row):
+        vibes = [str(row["track_genre"]), str(row["artists"]).replace(";", " ")]
+        vibes.append("high_energy" if row["energy"] > 0.65 else "chill_vibe")
+        vibes.append("happy_upbeat" if row["valence"] > 0.55 else "sad_moody")
+        vibes.append("danceable" if row["danceability"] > 0.65 else "steady_beat")
+        return " ".join(vibes)
+
+    songs["tags"] = songs.apply(build_song_tags, axis=1)
+    song_vec = TfidfVectorizer(max_features=5000, stop_words="english")
+    song_sim = cosine_similarity(song_vec.fit_transform(songs["tags"]))
+
+    return movies, movie_sim, songs, song_sim
+
+def get_recommendations(df, title_col, selected_name, sim_matrix, top_n=5):
+    idx = df[df[title_col] == selected_name].index[0]
+    scores = sorted(list(enumerate(sim_matrix[idx])), key=lambda x: x[1], reverse=True)
+    return [(df.iloc[i], round(score * 100, 1)) for i, score in scores[1 : top_n + 1]]
+
+movies_df, movie_sim_matrix, songs_df, song_sim_matrix = load_and_train_models()
+
+# --- 7. SECTION 001: RECOMMENDATION WORKSPACE ---
+st.markdown("""
+<div class="section-header-row">
+<div class="big-index-num">001</div>
+<div class="section-label-mono">SELECT A CATEGORY</div>
+</div>
+""", unsafe_allow_html=True)
+
+mode = st.radio(
+    "Category",
+    ["Movies", "Music"],
+    horizontal=True,
+    label_visibility="collapsed",
+)
+
+# --- MODE 1: MOVIES ---
+if mode == "Movies":
+    if "selected_movie" not in st.session_state:
+        st.session_state.selected_movie = "Inception" if "Inception" in movies_df["title"].values else movies_df["title"].iloc[0]
+
+    c1, c2, c3, c4 = st.columns([3.5, 1.2, 1.0, 1.1], vertical_alignment="bottom")
+    with c1:
+        movie_list = movies_df["title"].tolist()
+        default_idx = movie_list.index(st.session_state.selected_movie) if st.session_state.selected_movie in movie_list else 0
+        chosen_movie = st.selectbox("Select a movie", movie_list, index=default_idx)
+        st.session_state.selected_movie = chosen_movie
+    with c2:
+        top_n = st.slider("Results", 4, 8, 4)
+    with c3:
+        surprise_m = st.button("Random", use_container_width=True)
+    with c4:
+        st.button("Recommend", use_container_width=True)
+
+    if surprise_m:
+        st.session_state.selected_movie = random.choice(movies_df["title"].tolist())
+        st.rerun()
+
+    recs = get_recommendations(movies_df, "title", st.session_state.selected_movie, movie_sim_matrix, top_n=top_n)
+    st.markdown(f"<p class='section-label-mono' style='margin:1.1rem 0;'>SIMILAR TO <b>{st.session_state.selected_movie}</b></p>", unsafe_allow_html=True)
+
+    cols = st.columns(4)
+    for idx, (movie, match_pct) in enumerate(recs):
+        poster_url, _ = fetch_media_assets(movie["title"], media_type="movie")
+        year = str(movie.get("release_date", ""))[:4]
+        if poster_url:
+            art_html = f'<img src="{poster_url}">'
+        else:
+            art_html = f'<div class="fallback-art"><div class="fb-top">NO. 0{idx+1} // ARCHIVE</div><div class="fb-mid">{movie["title"]}</div><div class="fb-bot">{year}</div></div>'
+        with cols[idx % 4]:
+            st.markdown(f"""
+<div class="editorial-card">
+<div class="card-index-strip">
+<span>0{idx+1} // {year}</span>
+<span class="match-pill-orange">{match_pct}% MATCH</span>
+</div>
+<div class="media-frame poster-ratio">
+{art_html}
+<div class="card-arrow-tag">→</div>
+</div>
+<div class="ed-title">{movie["title"]}</div>
+<div class="ed-meta">{movie["vote_average"]}/10  ·  {movie["display_genre"]}</div>
+<div class="ed-desc">{movie["overview"][:105]}...</div>
+</div>
+""", unsafe_allow_html=True)
+
+# --- MODE 2: MUSIC ---
+else:
+    if "selected_song" not in st.session_state:
+        st.session_state.selected_song = songs_df["track_name"].iloc[0]
+
+    c1, c2, c3, c4 = st.columns([3.2, 1.5, 1.0, 1.1], vertical_alignment="bottom")
+    with c1:
+        song_list = songs_df["track_name"].tolist()
+        default_s_idx = song_list.index(st.session_state.selected_song) if st.session_state.selected_song in song_list else 0
+        chosen_song = st.selectbox("Select a track", song_list, index=default_s_idx)
+        st.session_state.selected_song = chosen_song
+    with c2:
+        profile_filter = st.selectbox("Audio Profile", ["All", "High Energy", "Calm & Ambient", "Dance"])
+    with c3:
+        surprise_s = st.button("Random", use_container_width=True)
+    with c4:
+        st.button("Recommend", use_container_width=True)
+
+    if surprise_s:
+        st.session_state.selected_song = random.choice(songs_df["track_name"].tolist())
+        st.rerun()
+
+    raw_recs = get_recommendations(songs_df, "track_name", st.session_state.selected_song, song_sim_matrix, top_n=15)
+    filtered_recs = []
+    for song, match_pct in raw_recs:
+        if profile_filter == "High Energy" and song["energy"] <= 0.65:
+            continue
+        if profile_filter == "Calm & Ambient" and song["energy"] > 0.65:
+            continue
+        if profile_filter == "Dance" and song["danceability"] <= 0.65:
+            continue
+        filtered_recs.append((song, match_pct))
+    display_recs = filtered_recs[:4] if filtered_recs else raw_recs[:4]
+
+    st.markdown(f"<p class='section-label-mono' style='margin:1.1rem 0;'>SIMILAR TO <b>{st.session_state.selected_song}</b></p>", unsafe_allow_html=True)
+
+    cols = st.columns(4)
+    for idx, (song, match_pct) in enumerate(display_recs):
+        artist_clean = str(song["artists"]).replace(";", ", ")
+        first_artist = str(song["artists"]).split(";")[0]
+        cover_url, preview_url = fetch_media_assets(f"{song['track_name']} {first_artist}", media_type="song")
+        if cover_url:
+            art_html = f'<img src="{cover_url}">'
+        else:
+            art_html = f'<div class="fallback-art"><div class="fb-top">TRK // 0{idx+1}</div><div class="fb-mid">{song["track_name"]}</div><div class="fb-bot">{song["track_genre"].upper()}</div></div>'
+        with cols[idx % 4]:
+            st.markdown(f"""
+<div class="editorial-card">
+<div class="card-index-strip">
+<span>0{idx+1} // {song["track_genre"].upper()}</span>
+<span class="match-pill-orange">{match_pct}% MATCH</span>
+</div>
+<div class="media-frame album-ratio">
+{art_html}
+<div class="card-arrow-tag">→</div>
+</div>
+<div class="ed-title">{song["track_name"]}</div>
+<div class="ed-meta">{artist_clean}</div>
+<div class="ed-desc">Energy {int(song["energy"]*100)}%  ·  Valence {int(song["valence"]*100)}%</div>
+</div>
+""", unsafe_allow_html=True)
+            if preview_url:
+                st.audio(preview_url)
