@@ -853,7 +853,7 @@ if mode == "Movies":
         chosen_movie = st.selectbox("Select a movie", movie_list, index=default_idx)
         st.session_state.selected_movie = chosen_movie
     with c2:
-        top_n = st.slider("Results", 4, 8, 4)
+        top_n = st.slider("Results", 4, 8, 4, key="movie_results")
     with c3:
         surprise_m = st.button("Random", use_container_width=True)
     with c4:
@@ -896,14 +896,14 @@ else:
     if "selected_song" not in st.session_state:
         st.session_state.selected_song = songs_df["track_name"].iloc[0]
 
-    c1, c2, c3, c4 = st.columns([3.2, 1.5, 1.0, 1.1], vertical_alignment="bottom")
+    c1, c2, c3, c4 = st.columns([3.5, 1.2, 1.0, 1.1], vertical_alignment="bottom")
     with c1:
         song_list = songs_df["track_name"].tolist()
         default_s_idx = song_list.index(st.session_state.selected_song) if st.session_state.selected_song in song_list else 0
         chosen_song = st.selectbox("Select a track", song_list, index=default_s_idx)
         st.session_state.selected_song = chosen_song
     with c2:
-        profile_filter = st.selectbox("Audio Profile", ["All", "High Energy", "Calm & Ambient", "Dance"])
+        top_n_s = st.slider("Results", 4, 8, 4, key="music_results")
     with c3:
         surprise_s = st.button("Random", use_container_width=True)
     with c4:
@@ -913,17 +913,7 @@ else:
         st.session_state.selected_song = random.choice(songs_df["track_name"].tolist())
         st.rerun()
 
-    raw_recs = get_recommendations(songs_df, "track_name", st.session_state.selected_song, song_sim_matrix, top_n=15)
-    filtered_recs = []
-    for song, match_pct in raw_recs:
-        if profile_filter == "High Energy" and song["energy"] <= 0.65:
-            continue
-        if profile_filter == "Calm & Ambient" and song["energy"] > 0.65:
-            continue
-        if profile_filter == "Dance" and song["danceability"] <= 0.65:
-            continue
-        filtered_recs.append((song, match_pct))
-    display_recs = filtered_recs[:4] if filtered_recs else raw_recs[:4]
+    display_recs = get_recommendations(songs_df, "track_name", st.session_state.selected_song, song_sim_matrix, top_n=top_n_s)
 
     st.markdown(f"<p class='section-label-mono' style='margin:1.1rem 0;'>SIMILAR TO <b>{st.session_state.selected_song}</b></p>", unsafe_allow_html=True)
 
