@@ -25,52 +25,57 @@ with toggle_col:
 if dark_mode:
     BG_CANVAS = "#0A0A0B"
     SURFACE_CARD = "#121214"
-    SURFACE_SUBTLE = "#18181B"
-    INK_PRIMARY = "#F4F4F2"
+    HERO_BG = "#181819"
+    SURFACE_SUBTLE = "#1E1E20"
+    INK_PRIMARY = "#FFFFFF"
     INK_SECONDARY = "#A1A1AA"
     INK_MUTED = "#6E6E73"
-    BORDER_HAIRLINE = "rgba(255, 255, 255, 0.11)"
+    RECOMMENDER_INK = "#FFFFFF"
+    BORDER_HAIRLINE = "rgba(255, 255, 255, 0.10)"
     GRID_LINE = "rgba(255, 255, 255, 0.025)"
-    AMBIENT_GLOW = "radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.06) 0%, rgba(18, 18, 20, 0) 68%)"
-    MARQUEE_BG = "#121214"
+    MARQUEE_BG = "#141416"
     MARQUEE_FG = "#A1A1AA"
-    BTN_BG = "#F4F4F2"
-    BTN_FG = "#0A0A0B"
-    PILL_BG = "#F4F4F2"
-    PILL_FG = "#0A0A0B"
+    BTN_BG = "#FFFFFF"
+    BTN_FG = "#181819"
+    PILL_BG = "#FFFFFF"
+    PILL_FG = "#181819"
     DOT_INACTIVE = "#323236"
     CARD_SHADOW = "0 18px 38px rgba(0, 0, 0, 0.45)"
 else:
     BG_CANVAS = "#F5F5F3"
     SURFACE_CARD = "#FFFFFF"
-    SURFACE_SUBTLE = "#EFEFED"
-    INK_PRIMARY = "#111111"
+    HERO_BG = "#FFFFFF"
+    SURFACE_SUBTLE = "#F2F2F0"
+    INK_PRIMARY = "#181819"
     INK_SECONDARY = "#525252"
     INK_MUTED = "#8A8A8A"
-    BORDER_HAIRLINE = "rgba(17, 17, 17, 0.11)"
-    GRID_LINE = "rgba(17, 17, 17, 0.025)"
-    AMBIENT_GLOW = "radial-gradient(circle at 50% 45%, rgba(17, 17, 17, 0.04) 0%, rgba(255, 255, 255, 0) 68%)"
+    RECOMMENDER_INK = "#181819"
+    BORDER_HAIRLINE = "rgba(24, 24, 25, 0.11)"
+    GRID_LINE = "rgba(24, 24, 25, 0.025)"
     MARQUEE_BG = "#FFFFFF"
     MARQUEE_FG = "#525252"
-    BTN_BG = "#111111"
+    BTN_BG = "#181819"
     BTN_FG = "#FFFFFF"
-    PILL_BG = "#111111"
+    PILL_BG = "#181819"
     PILL_FG = "#FFFFFF"
     DOT_INACTIVE = "#D4D4D0"
-    CARD_SHADOW = "0 18px 38px rgba(17, 17, 17, 0.07)"
+    CARD_SHADOW = "0 18px 38px rgba(24, 24, 25, 0.07)"
 
-# --- 3. ARCHITECTURAL MONOCHROME CSS (SHARP 90% CORNERS) ---
+# --- 3. FIGMA SF PRO + SHARP MONOCHROME CSS ---
 st.markdown(f"""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 
 :root {{
     --bg-canvas: {BG_CANVAS};
     --surface-card: {SURFACE_CARD};
+    --hero-bg: {HERO_BG};
     --surface-subtle: {SURFACE_SUBTLE};
     --ink-primary: {INK_PRIMARY};
     --ink-secondary: {INK_SECONDARY};
     --ink-muted: {INK_MUTED};
+    --figma-pink: #FF93C7;
+    --figma-purple: #D199FF;
     --arrow-accent: #FF3B1D;
     --border-hairline: {BORDER_HAIRLINE};
 }}
@@ -82,7 +87,7 @@ html, body {{
 .stApp {{
     background-color: var(--bg-canvas) !important;
     color: var(--ink-primary) !important;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Inter', sans-serif !important;
     transition: background-color 0.25s ease, color 0.25s ease;
 }}
 
@@ -216,7 +221,7 @@ div.stButton > button:hover {{
     justify-content: space-between;
     align-items: center;
     padding: 0.75rem 1.4rem;
-    background: var(--surface-card);
+    background: var(--hero-bg);
     border: 1px solid var(--border-hairline);
     border-radius: 3px;
     font-family: 'Space Mono', monospace;
@@ -235,7 +240,7 @@ div.stButton > button:hover {{
     width: 22px;
     height: 22px;
     border-radius: 2px;
-    border: 1px solid var(--ink-primary);
+    border: 1px solid var(--border-hairline);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -251,14 +256,13 @@ div.stButton > button:hover {{
     color: var(--ink-secondary);
 }}
 
-/* Centered Minimalist Hero Stage */
+/* Figma Hero Stage (#181819) */
 .sys-hero {{
     position: relative;
-    background: var(--surface-card);
-    background-image: {AMBIENT_GLOW};
+    background: var(--hero-bg);
     border: 1px solid var(--border-hairline);
     border-radius: 4px;
-    padding: 3.6rem 3rem 2.6rem 3rem;
+    padding: 2.8rem 2.6rem 2rem 2.6rem;
     margin-top: 1rem;
     display: flex;
     flex-direction: column;
@@ -271,11 +275,11 @@ div.stButton > button:hover {{
 
 .hero-top-tag {{
     font-family: 'Space Mono', monospace;
-    font-size: 0.68rem;
+    font-size: 0.66rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--ink-muted);
-    margin-bottom: 1.6rem;
+    margin-bottom: 2.6rem;
 }}
 
 .hero-center-row {{
@@ -283,13 +287,13 @@ div.stButton > button:hover {{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1.5rem;
-    margin: 0.4rem 0 1.4rem 0;
+    gap: 1.2rem;
+    margin: 0.5rem 0 2.8rem 0;
 }}
 
 .hero-side-ring {{
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
     border-radius: 2px;
     border: 1px solid var(--border-hairline);
     display: flex;
@@ -301,41 +305,44 @@ div.stButton > button:hover {{
     flex-shrink: 0;
 }}
 
+/* SF Pro Display Single-Line Title with Pink (#FF93C7) -> Purple (#D199FF) -> White (#FFFFFF) */
 .sys-brand {{
-    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: clamp(2.3rem, 4.6vw, 4.3rem);
-    line-height: 1.08;
-    letter-spacing: -0.035em;
-    color: var(--ink-primary);
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: clamp(1.65rem, 3.35vw, 3.25rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: {RECOMMENDER_INK};
     margin: 0 auto;
+    white-space: nowrap;
 }}
-
-.hero-hairline {{
-    width: 180px;
-    height: 1px;
-    background: var(--border-hairline);
-    margin: 0.6rem auto 1.2rem auto;
+.sys-brand .sf-gradient {{
+    background: linear-gradient(90deg, #FF93C7 0%, #FF93C7 38%, #D199FF 62%, #D199FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }}
 
 .sys-sub-meta {{
-    font-size: 0.96rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', sans-serif;
+    font-size: 0.94rem;
     color: var(--ink-secondary);
     font-weight: 400;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.005em;
 }}
 
 .hero-pill-bar {{
     display: inline-flex;
     align-items: center;
     gap: 12px;
-    margin-top: 1.6rem;
+    margin-top: 1.5rem;
     padding: 0.55rem 1.35rem;
     border: 1px solid var(--border-hairline);
     border-radius: 2px;
     background: var(--surface-subtle);
     font-family: 'Space Mono', monospace;
-    font-size: 0.68rem;
+    font-size: 0.66rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--ink-primary);
@@ -353,7 +360,7 @@ div.stButton > button:hover {{
 
 .hero-meta-left {{
     font-family: 'Space Mono', monospace;
-    font-size: 0.66rem;
+    font-size: 0.65rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--ink-muted);
@@ -382,11 +389,11 @@ div.stButton > button:hover {{
     border-radius: 2px;
     border: 1px solid var(--border-hairline);
     background: var(--surface-subtle);
-    color: var(--arrow-accent);
+    color: var(--ink-primary);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 700;
 }}
 .scroll-arrow-box span {{
@@ -432,7 +439,7 @@ div.stButton > button:hover {{
     margin: 1.8rem 0 1.4rem 0;
 }}
 .big-index-num {{
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', sans-serif;
     font-weight: 600;
     font-size: 2.2rem;
     line-height: 1;
@@ -465,7 +472,7 @@ div.stButton > button:hover {{
     width: 100%;
     overflow: hidden;
     border-radius: 2px;
-    background: #18181B;
+    background: #181819;
     margin-bottom: 12px;
 }}
 .poster-ratio {{ aspect-ratio: 2 / 3; }}
@@ -504,7 +511,7 @@ div.stButton > button:hover {{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background: #161618;
+    background: #181819;
 }}
 .fb-top {{
     font-family: 'Space Mono', monospace;
@@ -513,11 +520,11 @@ div.stButton > button:hover {{
     color: #71717A;
 }}
 .fb-mid {{
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', sans-serif;
     font-weight: 600;
     font-size: 1.25rem;
     line-height: 1.2;
-    color: #F4F4F2;
+    color: #FFFFFF;
     letter-spacing: -0.02em;
 }}
 .fb-bot {{
@@ -526,12 +533,12 @@ div.stButton > button:hover {{
     color: #A1A1AA;
 }}
 
-/* Signature Arrow Tag (Keeps the Subtle Orange Accent) */
+/* Signature Arrow Tag */
 .card-arrow-tag {{
     position: absolute;
     bottom: 8px;
     left: 8px;
-    background: rgba(17, 17, 17, 0.85);
+    background: rgba(24, 24, 25, 0.85);
     backdrop-filter: blur(6px);
     color: var(--arrow-accent);
     border-radius: 2px;
@@ -561,7 +568,7 @@ div[data-testid="stMarkdownContainer"] .match-pill-mono,
     font-size: 0.65rem;
 }}
 .ed-title {{
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', sans-serif;
     font-weight: 600;
     font-size: 1.02rem;
     line-height: 1.28;
@@ -604,14 +611,18 @@ div[data-testid="stMarkdownContainer"] .match-pill-mono,
     }}
     .hero-top-tag {{
         font-size: 0.6rem;
-        margin-bottom: 1.1rem;
+        margin-bottom: 1.4rem;
+    }}
+    .hero-center-row {{
+        margin: 0.3rem 0 1.6rem 0;
     }}
     .hero-side-ring {{
         display: none;
     }}
     .sys-brand {{
-        font-size: 2.05rem;
-        line-height: 1.1;
+        font-size: 1.65rem;
+        line-height: 1.15;
+        white-space: normal;
     }}
     .sys-sub-meta {{
         font-size: 0.86rem;
@@ -651,7 +662,7 @@ div[data-testid="stMarkdownContainer"] .match-pill-mono,
 </style>
 """, unsafe_allow_html=True)
 
-# --- 4. TOP NAVIGATION & CENTERED MINIMALIST HERO ---
+# --- 4. TOP NAVIGATION & FIGMA HERO ---
 st.markdown("""
 <div class="sys-topnav">
 <div class="nav-left-group">
@@ -668,11 +679,10 @@ st.markdown("""
 
 <div class="hero-center-row">
 <div class="hero-side-ring">+</div>
-<h1 class="sys-brand">Movie & Music<br>Recommender.</h1>
+<h1 class="sys-brand"><span class="sf-gradient">MOVIE &amp; MUSIC</span> RECOMMENDER</h1>
 <div class="hero-side-ring">+</div>
 </div>
 
-<div class="hero-hairline"></div>
 <div class="sys-sub-meta">Curated for your taste.</div>
 
 <div class="hero-pill-bar">
