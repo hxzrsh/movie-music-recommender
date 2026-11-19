@@ -61,12 +61,13 @@ else:
     DOT_INACTIVE = "#D4D4D0"
     CARD_SHADOW = "0 18px 38px rgba(24, 24, 25, 0.07)"
 
-# --- 3. FIGMA SF PRO + SHARP MONOCHROME CSS ---
+# --- 3. FIGMA SF PRO + BABY PURPLE (#D199FF) ACCENTS CSS ---
 st.markdown(f"""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 
-:root {{
+:root, .stApp {{
+    --primary-color: #D199FF !important;
     --bg-canvas: {BG_CANVAS};
     --surface-card: {SURFACE_CARD};
     --hero-bg: {HERO_BG};
@@ -76,7 +77,7 @@ st.markdown(f"""
     --ink-muted: {INK_MUTED};
     --figma-pink: #FF93C7;
     --figma-purple: #D199FF;
-    --arrow-accent: #FF3B1D;
+    --arrow-accent: #D199FF;
     --border-hairline: {BORDER_HAIRLINE};
 }}
 
@@ -124,16 +125,24 @@ div[data-testid="stRadio"] div[role="radiogroup"] p,
 div[data-testid="stSlider"] p,
 div[data-testid="stSlider"] div[data-testid="stTickBarMin"],
 div[data-testid="stSlider"] div[data-testid="stTickBarMax"],
-div[data-testid="stThumbValue"],
 div[data-testid="stToggle"] label p {{
     color: var(--ink-primary) !important;
 }}
 
+/* Baby Purple (#D199FF) Native Controls: Toggle, Radio & Slider */
 div[data-testid="stToggle"] label p {{
     font-family: 'Space Mono', monospace !important;
     font-size: 0.7rem !important;
     text-transform: uppercase !important;
     letter-spacing: 0.1em !important;
+}}
+div[data-testid="stToggle"] label > div[aria-checked="true"],
+div[data-testid="stToggle"] label:has(input:checked) > div:first-of-type {{
+    background-color: #D199FF !important;
+}}
+div[data-testid="stToggle"] label > div[aria-checked="true"] > div,
+div[data-testid="stToggle"] label:has(input:checked) > div:first-of-type > div {{
+    background-color: #181819 !important;
 }}
 
 div[data-testid="stRadio"] div[role="radiogroup"] {{
@@ -146,6 +155,22 @@ div[data-testid="stRadio"] label p {{
     font-weight: 700 !important;
     letter-spacing: 0.1em !important;
     text-transform: uppercase !important;
+}}
+div[data-testid="stRadio"] label[data-baseweb="radio"]:has(input:checked) > div:first-child {{
+    background-color: #D199FF !important;
+    border-color: #D199FF !important;
+}}
+div[data-testid="stRadio"] label[data-baseweb="radio"]:has(input:checked) > div:first-child > div {{
+    background-color: #181819 !important;
+}}
+
+div[data-testid="stSlider"] div[role="slider"] {{
+    background-color: #D199FF !important;
+    border-color: #D199FF !important;
+    box-shadow: 0 0 0 3px rgba(209, 153, 255, 0.22) !important;
+}}
+div[data-testid="stSlider"] div[data-testid="stThumbValue"] {{
+    color: #D199FF !important;
 }}
 
 /* Selectbox & Dropdown Menu Theme Sync (Sharp Corners) */
@@ -176,8 +201,8 @@ ul[data-baseweb="menu"] li {{
 }}
 ul[data-baseweb="menu"] li:hover,
 ul[data-baseweb="menu"] li[aria-selected="true"] {{
-    background-color: {BTN_BG} !important;
-    color: {BTN_FG} !important;
+    background-color: #D199FF !important;
+    color: #181819 !important;
 }}
 
 /* Minimalist Sharp Buttons */
@@ -192,13 +217,18 @@ div.stButton > button {{
     text-transform: uppercase !important;
     letter-spacing: 0.08em !important;
     padding: 0.62rem 1.2rem !important;
-    transition: opacity 0.2s ease, transform 0.2s ease !important;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease !important;
 }}
 div.stButton > button p {{
     color: {BTN_FG} !important;
 }}
 div.stButton > button:hover {{
-    opacity: 0.86 !important;
+    background-color: #D199FF !important;
+    border-color: #D199FF !important;
+    color: #181819 !important;
+}}
+div.stButton > button:hover p {{
+    color: #181819 !important;
 }}
 
 /* Animations */
@@ -380,7 +410,7 @@ div.stButton > button:hover {{
 .sys-dots span.active {{
     width: 6px;
     height: 6px;
-    background: var(--arrow-accent);
+    background: #D199FF;
 }}
 
 .scroll-arrow-box {{
@@ -389,7 +419,7 @@ div.stButton > button:hover {{
     border-radius: 2px;
     border: 1px solid var(--border-hairline);
     background: var(--surface-subtle);
-    color: var(--ink-primary);
+    color: #D199FF;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -489,7 +519,7 @@ div.stButton > button:hover {{
 @media (hover: hover) {{
     .editorial-card:hover {{
         transform: translateY(-5px);
-        border-color: var(--ink-primary);
+        border-color: #D199FF;
         box-shadow: {CARD_SHADOW};
     }}
     .editorial-card:hover .media-frame img {{
@@ -497,8 +527,8 @@ div.stButton > button:hover {{
         transform: scale(1.03);
     }}
     .editorial-card:hover .card-arrow-tag {{
-        background: var(--arrow-accent);
-        color: #FFFFFF;
+        background: #D199FF;
+        color: #181819;
     }}
 }}
 
@@ -533,14 +563,14 @@ div.stButton > button:hover {{
     color: #A1A1AA;
 }}
 
-/* Signature Arrow Tag */
+/* Signature Arrow Tag (#D199FF Baby Purple) */
 .card-arrow-tag {{
     position: absolute;
     bottom: 8px;
     left: 8px;
     background: rgba(24, 24, 25, 0.85);
     backdrop-filter: blur(6px);
-    color: var(--arrow-accent);
+    color: #D199FF;
     border-radius: 2px;
     font-family: 'Space Mono', monospace;
     font-size: 0.82rem;
