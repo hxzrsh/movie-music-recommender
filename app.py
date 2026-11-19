@@ -711,15 +711,48 @@ HOVER ANY CARD FOR COLOR &nbsp;—&nbsp;
 </div>
 """, unsafe_allow_html=True)
 
-# --- 5. ARTWORK & AUDIO PREVIEW FETCHER ---
+# --- 5. ARTWORK & AUDIO PREVIEW FETCHERS ---
 @st.cache_data(show_spinner=False)
-def fetch_media_assets(query, media_type="movie"):
+def fetch_movie_poster(title, year=""):
+    # Primary: IMDb public suggestion catalog
     try:
-        entity = "movie" if media_type == "movie" else "song"
+        query = f"{title} {year}".strip()
         encoded = urllib.parse.quote(query)
-        url = f"https://itunes.apple.com/search?term={encoded}&entity={entity}&limit=1"
+        url = f"https://v3.sg.media-imdb.com/suggestion/x/{encoded}.json"
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, timeout=3) as resp:
+        with urllib.request.urlopen(req, timeout=4) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+            for item in data.get("d", []):
+                img_obj = item.get("i") or {}
+                img = img_obj.get("imageUrl")
+                if img:
+                    return img
+    except Exception:
+        pass
+
+    # Secondary: iTunes Movie Search (US Storefront)
+    try:
+        encoded = urllib.parse.quote(title)
+        url = f"https://itunes.apple.com/search?term={encoded}&media=movie&country=US&limit=1"
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=4) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+            if data.get("results"):
+                art = data["results"][0].get("artworkUrl100", "")
+                if art:
+                    return art.replace("100x100", "600x600")
+    except Exception:
+        pass
+
+    return None
+
+@st.cache_data(show_spinner=False)
+def fetch_song_assets(query):
+    try:
+        encoded = urllib.parse.quote(query)
+        url = f"https://itunes.apple.com/search?term={encoded}&entity=song&limit=1"
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=4) as resp:
             data = json.loads(resp.read().decode("utf-8"))
             if data.get("results"):
                 item = data["results"][0]
@@ -829,8 +862,8 @@ if mode == "Movies":
 
     cols = st.columns(4)
     for idx, (movie, match_pct) in enumerate(recs):
-        poster_url, _ = fetch_media_assets(movie["title"], media_type="movie")
         year = str(movie.get("release_date", ""))[:4]
+        poster_url = fetch_movie_poster(movie["title"], year)
         if poster_url:
             art_html = f'<img src="{poster_url}">'
         else:
@@ -892,7 +925,7 @@ else:
     for idx, (song, match_pct) in enumerate(display_recs):
         artist_clean = str(song["artists"]).replace(";", ", ")
         first_artist = str(song["artists"]).split(";")[0]
-        cover_url, preview_url = fetch_media_assets(f"{song['track_name']} {first_artist}", media_type="song")
+        cover_url, preview_url = fetch_song_assets(f"{song['track_name']} {first_artist}")
         if cover_url:
             art_html = f'<img src="{cover_url}">'
         else:
