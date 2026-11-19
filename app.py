@@ -80,6 +80,9 @@ st.markdown(f"""
 }}
 
 #MainMenu, footer, header {{visibility: hidden;}}
+.stMarkdown h1 a, [data-testid="stHeaderActionElements"] {{
+    display: none !important;
+}}
 .block-container {{
     padding-top: 1.2rem !important;
     padding-bottom: 4rem !important;
@@ -245,7 +248,7 @@ div.stButton > button:hover p {{
 
 .sys-sub-meta {{
     margin-top: 1.3rem;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: var(--ink-primary);
     font-weight: 600;
     letter-spacing: -0.01em;
@@ -564,31 +567,31 @@ st.markdown("""
 <div>
 <h1 class="sys-brand">Movie & Music<br>Recommendation<br>System<span class="dot">.</span></h1>
 <div class="sys-sub-meta">
-Content-Based Discovery Engine
-<span class="sub-tag">EDITION 01 // 14,800+ INDEXED TITLES</span>
+Curated for your taste.
+<span class="sub-tag">14,800+ FILMS & TRACKS</span>
 </div>
 <div class="sys-dots">
 <span class="active"></span><span></span><span></span><span></span><span></span><span></span><span></span>
 </div>
 <div class="sys-spec-block">
-<strong>MODEL // 001</strong><br>
+<strong>CURATED // 001</strong><br>
 ---<br>
-TF-IDF VECTORIZATION<br>
-COSINE SIMILARITY MATRIX
+INSTANT TASTE MATCHING<br>
+FILMS & AUDIO
 </div>
 </div>
 <div class="sys-visual-stage">
 <div class="orange-slab"></div>
 <div class="orange-ring">
 <div class="ring-letter">ML</div>
-<div class="ring-caption">ENGINE</div>
+<div class="ring-caption">INDEX</div>
 </div>
 </div>
 <div class="sys-right-rail">
 <div class="vertical-text">
-MACHINE LEARNING<br>
-RECOMMENDATION<br>
-ENGINE 2026
+MOVIE & MUSIC<br>
+CURATED<br>
+INDEX 2026
 </div>
 <div class="scroll-arrow-box"><span>↓</span></div>
 </div>
@@ -597,13 +600,13 @@ ENGINE 2026
 <div class="marquee-wrap">
 <div class="marquee-track">
 <span class="marquee-accent">001 //</span> MOVIE & MUSIC RECOMMENDATION SYSTEM &nbsp;—&nbsp;
-4,800 MOVIES &nbsp;—&nbsp; 10,000 TRACKS &nbsp;—&nbsp;
-<span class="marquee-accent">TF-IDF & COSINE SIMILARITY</span> &nbsp;—&nbsp;
-HOVER ANY CARD TO REVEAL COLOR &nbsp;—&nbsp;
+4,800 FILMS &nbsp;—&nbsp; 10,000 TRACKS &nbsp;—&nbsp;
+<span class="marquee-accent">CURATED FOR YOUR TASTE</span> &nbsp;—&nbsp;
+HOVER ANY CARD FOR COLOR &nbsp;—&nbsp;
 <span class="marquee-accent">001 //</span> MOVIE & MUSIC RECOMMENDATION SYSTEM &nbsp;—&nbsp;
-4,800 MOVIES &nbsp;—&nbsp; 10,000 TRACKS &nbsp;—&nbsp;
-<span class="marquee-accent">TF-IDF & COSINE SIMILARITY</span> &nbsp;—&nbsp;
-HOVER ANY CARD TO REVEAL COLOR &nbsp;—&nbsp;
+4,800 FILMS &nbsp;—&nbsp; 10,000 TRACKS &nbsp;—&nbsp;
+<span class="marquee-accent">CURATED FOR YOUR TASTE</span> &nbsp;—&nbsp;
+HOVER ANY CARD FOR COLOR &nbsp;—&nbsp;
 </div>
 </div>
 """, unsafe_allow_html=True)
@@ -688,7 +691,7 @@ movies_df, movie_sim_matrix, songs_df, song_sim_matrix = load_and_train_models()
 st.markdown("""
 <div class="section-header-row">
 <div class="big-index-num">001</div>
-<div class="section-label-mono">RECOMMENDATION INDEX // SELECT CATEGORY</div>
+<div class="section-label-mono">SELECT A CATEGORY</div>
 </div>
 """, unsafe_allow_html=True)
 
