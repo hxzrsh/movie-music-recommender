@@ -23,46 +23,55 @@ with toggle_col:
     dark_mode = st.toggle("Dark Mode", key="dark_mode_toggle", on_change=sync_theme)
 
 if dark_mode:
-    BG_CANVAS = "#0D0D0D"
-    SURFACE_CARD = "#161616"
-    INK_PRIMARY = "#F2F1ED"
-    INK_SECONDARY = "#B5B4AF"
-    INK_MUTED = "#7D7C78"
-    BORDER_HAIRLINE = "rgba(242, 241, 237, 0.14)"
-    GRID_LINE = "rgba(242, 241, 237, 0.035)"
-    RING_BG = "rgba(22, 22, 22, 0.92)"
-    MARQUEE_BG = "#1A1A1A"
-    MARQUEE_FG = "#F2F1ED"
-    BTN_BG = "#F2F1ED"
-    BTN_FG = "#0D0D0D"
-    DOT_INACTIVE = "#3E3E3C"
+    BG_CANVAS = "#0A0A0B"
+    SURFACE_CARD = "#121214"
+    SURFACE_SUBTLE = "#18181B"
+    INK_PRIMARY = "#F4F4F2"
+    INK_SECONDARY = "#A1A1AA"
+    INK_MUTED = "#6E6E73"
+    BORDER_HAIRLINE = "rgba(255, 255, 255, 0.10)"
+    GRID_LINE = "rgba(255, 255, 255, 0.025)"
+    AMBIENT_GLOW = "radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.06) 0%, rgba(18, 18, 20, 0) 68%)"
+    MARQUEE_BG = "#121214"
+    MARQUEE_FG = "#A1A1AA"
+    BTN_BG = "#F4F4F2"
+    BTN_FG = "#0A0A0B"
+    PILL_BG = "#F4F4F2"
+    PILL_FG = "#0A0A0B"
+    DOT_INACTIVE = "#323236"
+    CARD_SHADOW = "0 18px 38px rgba(0, 0, 0, 0.45)"
 else:
-    BG_CANVAS = "#E7E6E3"
-    SURFACE_CARD = "#ECEBE8"
+    BG_CANVAS = "#F5F5F3"
+    SURFACE_CARD = "#FFFFFF"
+    SURFACE_SUBTLE = "#EFEFED"
     INK_PRIMARY = "#111111"
-    INK_SECONDARY = "#4A4A48"
-    INK_MUTED = "#6E6E6B"
-    BORDER_HAIRLINE = "rgba(17, 17, 17, 0.16)"
-    GRID_LINE = "rgba(17, 17, 17, 0.035)"
-    RING_BG = "rgba(236, 235, 232, 0.9)"
-    MARQUEE_BG = "#111111"
-    MARQUEE_FG = "#ECEBE8"
+    INK_SECONDARY = "#525252"
+    INK_MUTED = "#8A8A8A"
+    BORDER_HAIRLINE = "rgba(17, 17, 17, 0.09)"
+    GRID_LINE = "rgba(17, 17, 17, 0.025)"
+    AMBIENT_GLOW = "radial-gradient(circle at 50% 45%, rgba(17, 17, 17, 0.04) 0%, rgba(255, 255, 255, 0) 68%)"
+    MARQUEE_BG = "#FFFFFF"
+    MARQUEE_FG = "#525252"
     BTN_BG = "#111111"
     BTN_FG = "#FFFFFF"
-    DOT_INACTIVE = "#B5B4B0"
+    PILL_BG = "#111111"
+    PILL_FG = "#FFFFFF"
+    DOT_INACTIVE = "#D4D4D0"
+    CARD_SHADOW = "0 18px 38px rgba(17, 17, 17, 0.07)"
 
-# --- 3. SWISS EDITORIAL CSS (DESKTOP + MOBILE RESPONSIVE) ---
+# --- 3. ARCHITECTURAL MONOCHROME CSS (DESKTOP + MOBILE RESPONSIVE) ---
 st.markdown(f"""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 
 :root {{
     --bg-canvas: {BG_CANVAS};
     --surface-card: {SURFACE_CARD};
+    --surface-subtle: {SURFACE_SUBTLE};
     --ink-primary: {INK_PRIMARY};
     --ink-secondary: {INK_SECONDARY};
     --ink-muted: {INK_MUTED};
-    --signal-orange: #FF3B1D;
+    --arrow-accent: #FF3B1D;
     --border-hairline: {BORDER_HAIRLINE};
 }}
 
@@ -73,7 +82,7 @@ html, body {{
 .stApp {{
     background-color: var(--bg-canvas) !important;
     color: var(--ink-primary) !important;
-    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
     transition: background-color 0.25s ease, color 0.25s ease;
 }}
 
@@ -84,7 +93,7 @@ html, body {{
     background-image:
         linear-gradient(to right, {GRID_LINE} 1px, transparent 1px),
         linear-gradient(to bottom, {GRID_LINE} 1px, transparent 1px);
-    background-size: 80px 80px;
+    background-size: 96px 96px;
     pointer-events: none;
     z-index: 0;
 }}
@@ -96,7 +105,7 @@ html, body {{
 .block-container {{
     padding-top: 1.2rem !important;
     padding-bottom: 4rem !important;
-    max-width: 1380px !important;
+    max-width: 1340px !important;
 }}
 
 /* Adaptive High-Contrast Text on All Native Widgets */
@@ -117,9 +126,9 @@ div[data-testid="stToggle"] label p {{
 
 div[data-testid="stToggle"] label p {{
     font-family: 'Space Mono', monospace !important;
-    font-size: 0.72rem !important;
+    font-size: 0.7rem !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.08em !important;
+    letter-spacing: 0.1em !important;
 }}
 
 div[data-testid="stRadio"] div[role="radiogroup"] {{
@@ -128,17 +137,17 @@ div[data-testid="stRadio"] div[role="radiogroup"] {{
 }}
 div[data-testid="stRadio"] label p {{
     font-family: 'Space Mono', monospace !important;
-    font-size: 0.82rem !important;
+    font-size: 0.8rem !important;
     font-weight: 700 !important;
-    letter-spacing: 0.08em !important;
+    letter-spacing: 0.1em !important;
     text-transform: uppercase !important;
 }}
 
 /* Selectbox & Dropdown Menu Theme Sync */
 div[data-baseweb="select"] > div {{
     background-color: var(--surface-card) !important;
-    border-radius: 0px !important;
-    border: 1px solid var(--ink-primary) !important;
+    border-radius: 10px !important;
+    border: 1px solid var(--border-hairline) !important;
     color: var(--ink-primary) !important;
 }}
 div[data-baseweb="select"] span,
@@ -153,8 +162,8 @@ div[data-baseweb="select"] svg {{
 div[data-baseweb="popover"],
 ul[data-baseweb="menu"] {{
     background-color: var(--surface-card) !important;
-    border: 1px solid var(--ink-primary) !important;
-    border-radius: 0px !important;
+    border: 1px solid var(--border-hairline) !important;
+    border-radius: 10px !important;
 }}
 ul[data-baseweb="menu"] li {{
     color: var(--ink-primary) !important;
@@ -162,120 +171,197 @@ ul[data-baseweb="menu"] li {{
 }}
 ul[data-baseweb="menu"] li:hover,
 ul[data-baseweb="menu"] li[aria-selected="true"] {{
-    background-color: #FF3B1D !important;
-    color: #FFFFFF !important;
+    background-color: {BTN_BG} !important;
+    color: {BTN_FG} !important;
 }}
 
-/* Primary Buttons */
+/* Minimalist Buttons */
 div.stButton > button {{
     background-color: {BTN_BG} !important;
     color: {BTN_FG} !important;
     border: 1px solid {BTN_BG} !important;
-    border-radius: 0px !important;
+    border-radius: 10px !important;
     font-family: 'Space Mono', monospace !important;
-    font-size: 0.76rem !important;
+    font-size: 0.74rem !important;
     font-weight: 700 !important;
     text-transform: uppercase !important;
     letter-spacing: 0.08em !important;
     padding: 0.62rem 1.2rem !important;
-    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease !important;
+    transition: opacity 0.2s ease, transform 0.2s ease !important;
 }}
 div.stButton > button p {{
     color: {BTN_FG} !important;
 }}
 div.stButton > button:hover {{
-    background-color: var(--signal-orange) !important;
-    border-color: var(--signal-orange) !important;
-    color: #FFFFFF !important;
-}}
-div.stButton > button:hover p {{
-    color: #FFFFFF !important;
+    opacity: 0.86 !important;
 }}
 
 /* Animations */
 @keyframes fadeSlideUp {{
-    0% {{ opacity: 0; transform: translateY(18px); }}
+    0% {{ opacity: 0; transform: translateY(16px); }}
     100% {{ opacity: 1; transform: translateY(0); }}
 }}
 @keyframes bounceDown {{
     0%, 100% {{ transform: translateY(0); }}
-    50% {{ transform: translateY(5px); }}
+    50% {{ transform: translateY(4px); }}
 }}
 @keyframes marqueeScroll {{
     0% {{ transform: translateX(0%); }}
     100% {{ transform: translateX(-50%); }}
 }}
 
-/* Top Navigation Bar */
+/* Top Architectural Navigation Bar */
 .sys-topnav {{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.6rem 0 1.2rem 0;
-    border-bottom: 1px solid var(--border-hairline);
+    padding: 0.75rem 1.4rem;
+    background: var(--surface-card);
+    border: 1px solid var(--border-hairline);
+    border-radius: 14px;
     font-family: 'Space Mono', monospace;
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--ink-primary);
     animation: fadeSlideUp 0.45s ease-out;
 }}
-.sys-topnav span.plus-mark {{
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-weight: 800;
-    font-size: 1rem;
+.nav-left-group {{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}}
+.geo-mark {{
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1px solid var(--ink-primary);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.62rem;
+    font-weight: 700;
     letter-spacing: 0;
 }}
+.nav-pill {{
+    border: 1px solid var(--border-hairline);
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-size: 0.66rem;
+    color: var(--ink-secondary);
+}}
 
-/* Hero Container */
+/* Centered Minimalist Hero Stage */
 .sys-hero {{
     position: relative;
     background: var(--surface-card);
+    background-image: {AMBIENT_GLOW};
     border: 1px solid var(--border-hairline);
-    padding: 2.6rem 3rem;
-    margin-top: 1.2rem;
-    display: grid;
-    grid-template-columns: 1.25fr 1.05fr 0.2fr;
+    border-radius: 22px;
+    padding: 3.6rem 3rem 2.6rem 3rem;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    text-align: center;
     overflow: hidden;
-    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.08);
+    box-shadow: {CARD_SHADOW};
     animation: fadeSlideUp 0.6s ease-out;
 }}
 
-.sys-brand {{
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-weight: 800;
-    font-size: clamp(2.4rem, 4.3vw, 4.1rem);
-    line-height: 1.02;
-    letter-spacing: -0.04em;
-    color: var(--ink-primary);
-    margin: 0;
+.hero-top-tag {{
+    font-family: 'Space Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 1.6rem;
 }}
-.sys-brand .dot {{
-    color: var(--signal-orange);
+
+.hero-center-row {{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin: 0.4rem 0 1.4rem 0;
+}}
+
+.hero-side-ring {{
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid var(--border-hairline);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    flex-shrink: 0;
+}}
+
+.sys-brand {{
+    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: clamp(2.3rem, 4.6vw, 4.3rem);
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+    color: var(--ink-primary);
+    margin: 0 auto;
+}}
+
+.hero-hairline {{
+    width: 180px;
+    height: 1px;
+    background: var(--border-hairline);
+    margin: 0.6rem auto 1.2rem auto;
 }}
 
 .sys-sub-meta {{
-    margin-top: 1.3rem;
-    font-size: 0.95rem;
-    color: var(--ink-primary);
-    font-weight: 600;
-    letter-spacing: -0.01em;
+    font-size: 0.96rem;
+    color: var(--ink-secondary);
+    font-weight: 400;
+    letter-spacing: 0.01em;
 }}
-.sys-sub-meta .sub-tag {{
-    display: block;
+
+.hero-pill-bar {{
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 1.6rem;
+    padding: 0.55rem 1.35rem;
+    border: 1px solid var(--border-hairline);
+    border-radius: 999px;
+    background: var(--surface-subtle);
     font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-primary);
+}}
+
+.hero-bottom-bar {{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2.6rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--border-hairline);
+}}
+
+.hero-meta-left {{
+    font-family: 'Space Mono', monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     color: var(--ink-muted);
-    margin-top: 4px;
-    letter-spacing: 0.08em;
 }}
 
 .sys-dots {{
     display: flex;
-    gap: 12px;
-    margin: 1.5rem 0;
+    gap: 9px;
     align-items: center;
 }}
 .sys-dots span {{
@@ -285,153 +371,77 @@ div.stButton > button:hover p {{
     background: {DOT_INACTIVE};
 }}
 .sys-dots span.active {{
-    width: 7px;
-    height: 7px;
-    background: var(--signal-orange);
-    box-shadow: 0 0 0 4px rgba(255, 59, 29, 0.18);
+    width: 6px;
+    height: 6px;
+    background: var(--arrow-accent);
 }}
 
-.sys-spec-block {{
-    font-family: 'Space Mono', monospace;
-    font-size: 0.68rem;
-    line-height: 1.65;
-    color: var(--ink-muted);
-    text-transform: uppercase;
-    margin-top: 1.4rem;
-}}
-.sys-spec-block strong {{
-    color: var(--ink-primary);
-}}
-
-.sys-visual-stage {{
-    position: relative;
-    height: 290px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}}
-.orange-slab {{
-    position: absolute;
-    right: -3rem;
-    left: 15%;
-    height: 165px;
-    background: var(--signal-orange);
-    z-index: 1;
-}}
-.orange-ring {{
-    position: relative;
-    z-index: 2;
-    width: 205px;
-    height: 205px;
-    border-radius: 50%;
-    border: 14px solid var(--signal-orange);
-    background: {RING_BG};
-    backdrop-filter: blur(6px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 18px 35px rgba(255, 59, 29, 0.22);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}}
-.ring-letter {{
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-weight: 800;
-    font-size: 4.2rem;
-    line-height: 1;
-    letter-spacing: -0.04em;
-    color: var(--signal-orange);
-}}
-.ring-caption {{
-    font-family: 'Space Mono', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.16em;
-    color: var(--ink-primary);
-    margin-top: 6px;
-}}
-
-.sys-right-rail {{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: space-between;
-    height: 100%;
-}}
-.vertical-text {{
-    writing-mode: vertical-rl;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-primary);
-    line-height: 1.5;
-}}
 .scroll-arrow-box {{
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 46px;
-    height: 54px;
-    background: var(--signal-orange);
-    color: #FFFFFF;
-    display: flex;
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    border: 1px solid var(--border-hairline);
+    background: var(--surface-subtle);
+    color: var(--arrow-accent);
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
+    font-size: 0.95rem;
     font-weight: 700;
 }}
 .scroll-arrow-box span {{
     animation: bounceDown 1.6s infinite ease-in-out;
 }}
 
-/* Ticker Bar */
+/* Minimal Ticker Bar */
 .marquee-wrap {{
     width: 100%;
     overflow: hidden;
     background: {MARQUEE_BG};
     color: {MARQUEE_FG};
-    border-left: 1px solid var(--border-hairline);
-    border-right: 1px solid var(--border-hairline);
-    border-bottom: 1px solid var(--border-hairline);
-    padding: 0.55rem 0;
+    border: 1px solid var(--border-hairline);
+    border-radius: 12px;
+    padding: 0.65rem 0;
     font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
+    margin-top: 0.85rem;
     margin-bottom: 2rem;
 }}
 .marquee-track {{
     display: inline-block;
     white-space: nowrap;
-    animation: marqueeScroll 28s linear infinite;
+    animation: marqueeScroll 32s linear infinite;
 }}
 .marquee-wrap:hover .marquee-track {{
     animation-play-state: paused;
 }}
-.marquee-accent {{
-    color: var(--signal-orange);
+.marquee-strong {{
+    color: var(--ink-primary);
     font-weight: 700;
 }}
 
 /* Section Header */
 .section-header-row {{
     display: flex;
-    align-items: flex-end;
+    align-items: baseline;
     justify-content: space-between;
-    border-bottom: 1px solid var(--ink-primary);
+    border-bottom: 1px solid var(--border-hairline);
     padding-bottom: 0.75rem;
-    margin: 2rem 0 1.4rem 0;
+    margin: 1.8rem 0 1.4rem 0;
 }}
 .big-index-num {{
-    font-family: 'Anton', sans-serif;
-    font-size: 3.4rem;
-    line-height: 0.85;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    font-size: 2.2rem;
+    line-height: 1;
     color: var(--ink-primary);
-    letter-spacing: 0.02em;
+    letter-spacing: -0.03em;
 }}
 .section-label-mono {{
     font-family: 'Space Mono', monospace;
-    font-size: 0.74rem;
+    font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 0.12em;
     color: var(--ink-secondary);
@@ -441,6 +451,7 @@ div.stButton > button:hover p {{
 .editorial-card {{
     background: var(--surface-card);
     border: 1px solid var(--border-hairline);
+    border-radius: 16px;
     padding: 14px;
     position: relative;
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
@@ -453,7 +464,8 @@ div.stButton > button:hover p {{
     position: relative;
     width: 100%;
     overflow: hidden;
-    background: #1A1A1A;
+    border-radius: 10px;
+    background: #18181B;
     margin-bottom: 12px;
 }}
 .poster-ratio {{ aspect-ratio: 2 / 3; }}
@@ -463,25 +475,23 @@ div.stButton > button:hover p {{
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: grayscale(100%) contrast(1.08);
+    filter: grayscale(100%) contrast(1.05);
     transition: filter 0.4s ease, transform 0.4s ease;
 }}
 
 @media (hover: hover) {{
-    .sys-hero:hover .orange-ring {{
-        transform: scale(1.04);
-    }}
     .editorial-card:hover {{
-        transform: translateY(-6px);
+        transform: translateY(-5px);
         border-color: var(--ink-primary);
-        box-shadow: 7px 7px 0px var(--signal-orange);
+        box-shadow: {CARD_SHADOW};
     }}
     .editorial-card:hover .media-frame img {{
         filter: grayscale(0%) contrast(1);
         transform: scale(1.03);
     }}
     .editorial-card:hover .card-arrow-tag {{
-        background: var(--signal-orange);
+        background: var(--arrow-accent);
+        color: #FFFFFF;
     }}
 }}
 
@@ -494,40 +504,42 @@ div.stButton > button:hover p {{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background: #181818;
-    border-bottom: 3px solid var(--signal-orange);
+    background: #161618;
 }}
 .fb-top {{
     font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
+    font-size: 0.64rem;
     letter-spacing: 0.14em;
-    color: #8E8E8A;
+    color: #71717A;
 }}
 .fb-mid {{
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-weight: 800;
-    font-size: 1.35rem;
-    line-height: 1.15;
-    color: #ECEBE8;
-    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 1.25rem;
+    line-height: 1.2;
+    color: #F4F4F2;
     letter-spacing: -0.02em;
 }}
 .fb-bot {{
     font-family: 'Space Mono', monospace;
-    font-size: 0.68rem;
-    color: var(--signal-orange);
+    font-size: 0.66rem;
+    color: #A1A1AA;
 }}
 
+/* Signature Arrow Tag (Keeps the Subtle Orange Accent) */
 .card-arrow-tag {{
     position: absolute;
-    bottom: 0;
-    left: 0;
-    background: #111111;
-    color: #FFFFFF;
+    bottom: 8px;
+    left: 8px;
+    background: rgba(17, 17, 17, 0.82);
+    backdrop-filter: blur(6px);
+    color: var(--arrow-accent);
+    border-radius: 7px;
     font-family: 'Space Mono', monospace;
-    font-size: 0.8rem;
-    padding: 4px 9px;
-    transition: background 0.25s ease;
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 3px 9px;
+    transition: background 0.25s ease, color 0.25s ease;
 }}
 
 .card-index-strip {{
@@ -535,35 +547,36 @@ div.stButton > button:hover p {{
     justify-content: space-between;
     align-items: center;
     font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--ink-muted);
-    margin-bottom: 6px;
-}}
-.match-pill-orange {{
-    background: var(--signal-orange);
-    color: #FFFFFF;
-    padding: 2px 7px;
-    font-weight: 700;
     font-size: 0.68rem;
+    color: var(--ink-muted);
+    margin-bottom: 8px;
+}}
+.match-pill-mono {{
+    background: {PILL_BG};
+    color: {PILL_FG};
+    border-radius: 999px;
+    padding: 2px 9px;
+    font-weight: 700;
+    font-size: 0.65rem;
 }}
 .ed-title {{
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-weight: 700;
-    font-size: 1.05rem;
-    line-height: 1.25;
+    font-weight: 600;
+    font-size: 1.02rem;
+    line-height: 1.28;
     color: var(--ink-primary);
     margin-bottom: 4px;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.015em;
 }}
 .ed-meta {{
     font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     color: var(--ink-muted);
     margin-bottom: 8px;
 }}
 .ed-desc {{
     font-size: 0.8rem;
-    line-height: 1.45;
+    line-height: 1.48;
     color: var(--ink-secondary);
 }}
 
@@ -576,72 +589,47 @@ div.stButton > button:hover p {{
         padding-bottom: 3rem !important;
     }}
     .sys-topnav {{
-        font-size: 0.62rem;
+        padding: 0.65rem 1rem;
+        font-size: 0.6rem;
         letter-spacing: 0.06em;
-        padding: 0.5rem 0 0.9rem 0;
     }}
     .sys-topnav .nav-right {{
         display: none;
     }}
     .sys-hero {{
-        grid-template-columns: 1fr;
-        padding: 1.6rem 1.4rem 3.5rem 1.4rem;
-        gap: 1.4rem;
-        margin-top: 0.8rem;
+        padding: 2.2rem 1.2rem 1.5rem 1.2rem;
+        border-radius: 18px;
+        margin-top: 0.75rem;
     }}
-    .sys-brand {{
-        font-size: 2.2rem;
-        line-height: 1.04;
+    .hero-top-tag {{
+        font-size: 0.6rem;
+        margin-bottom: 1.1rem;
     }}
-    .sys-sub-meta {{
-        margin-top: 0.9rem;
-        font-size: 0.88rem;
-    }}
-    .sys-dots {{
-        margin: 1rem 0;
-        gap: 10px;
-    }}
-    .sys-spec-block {{
-        margin-top: 1rem;
-        font-size: 0.64rem;
-    }}
-    .sys-visual-stage {{
-        height: 195px;
-        margin: 0.2rem 0;
-    }}
-    .orange-slab {{
-        left: -1.4rem;
-        right: -1.4rem;
-        height: 112px;
-    }}
-    .orange-ring {{
-        width: 152px;
-        height: 152px;
-        border-width: 10px;
-    }}
-    .ring-letter {{
-        font-size: 3.1rem;
-    }}
-    .ring-caption {{
-        font-size: 0.56rem;
-    }}
-    .sys-right-rail {{
-        align-items: flex-start;
-    }}
-    .vertical-text {{
-        writing-mode: horizontal-tb;
-        font-size: 0.62rem;
-        letter-spacing: 0.1em;
-    }}
-    .vertical-text br {{
+    .hero-side-ring {{
         display: none;
     }}
-    .scroll-arrow-box {{
-        width: 40px;
-        height: 44px;
+    .sys-brand {{
+        font-size: 2.05rem;
+        line-height: 1.1;
+    }}
+    .sys-sub-meta {{
+        font-size: 0.86rem;
+    }}
+    .hero-pill-bar {{
+        font-size: 0.6rem;
+        padding: 0.48rem 1rem;
+        margin-top: 1.2rem;
+    }}
+    .hero-bottom-bar {{
+        margin-top: 1.8rem;
+        padding-top: 0.9rem;
+    }}
+    .hero-meta-left {{
+        font-size: 0.58rem;
+        letter-spacing: 0.06em;
     }}
     .marquee-wrap {{
-        font-size: 0.64rem;
+        font-size: 0.62rem;
         margin-bottom: 1.4rem;
     }}
     .section-header-row {{
@@ -649,7 +637,7 @@ div.stButton > button:hover p {{
         padding-bottom: 0.55rem;
     }}
     .big-index-num {{
-        font-size: 2.4rem;
+        font-size: 1.8rem;
     }}
     .section-label-mono {{
         font-size: 0.64rem;
@@ -662,42 +650,40 @@ div.stButton > button:hover p {{
 </style>
 """, unsafe_allow_html=True)
 
-# --- 4. TOP NAVIGATION & HERO ---
+# --- 4. TOP NAVIGATION & CENTERED MINIMALIST HERO ---
 st.markdown("""
 <div class="sys-topnav">
-<div><span class="plus-mark">+1</span> &nbsp;&nbsp; MOVIE & MUSIC RECOMMENDATION SYSTEM</div>
-<div class="nav-right">MOVIES &nbsp;&nbsp;&nbsp; MUSIC &nbsp;&nbsp;&nbsp; 2026 &nbsp;&nbsp;&nbsp; • • •</div>
+<div class="nav-left-group">
+<span class="geo-mark">+1</span>
+<span>MOVIE & MUSIC RECOMMENDATION SYSTEM</span>
+</div>
+<div class="nav-right">
+<span class="nav-pill">MOVIES &nbsp;·&nbsp; MUSIC &nbsp;·&nbsp; 2026</span>
+</div>
 </div>
 
 <div class="sys-hero">
-<div>
-<h1 class="sys-brand">Movie & Music<br>Recommendation<br>System<span class="dot">.</span></h1>
-<div class="sys-sub-meta">
-Curated for your taste.
-<span class="sub-tag">14,800+ FILMS & TRACKS</span>
+<div class="hero-top-tag">CURATED // 001 &nbsp;·&nbsp; INDEX 2026</div>
+
+<div class="hero-center-row">
+<div class="hero-side-ring">+</div>
+<h1 class="sys-brand">Movie & Music<br>Recommender.</h1>
+<div class="hero-side-ring">+</div>
 </div>
+
+<div class="hero-hairline"></div>
+<div class="sys-sub-meta">Curated for your taste.</div>
+
+<div class="hero-pill-bar">
+<span>14,800+ FILMS & TRACKS</span>
+<span>·</span>
+<span>INSTANT TASTE MATCHING</span>
+</div>
+
+<div class="hero-bottom-bar">
+<div class="hero-meta-left">FILMS & AUDIO</div>
 <div class="sys-dots">
-<span class="active"></span><span></span><span></span><span></span><span></span><span></span><span></span>
-</div>
-<div class="sys-spec-block">
-<strong>CURATED // 001</strong><br>
----<br>
-INSTANT TASTE MATCHING<br>
-FILMS & AUDIO
-</div>
-</div>
-<div class="sys-visual-stage">
-<div class="orange-slab"></div>
-<div class="orange-ring">
-<div class="ring-letter">ML</div>
-<div class="ring-caption">INDEX</div>
-</div>
-</div>
-<div class="sys-right-rail">
-<div class="vertical-text">
-MOVIE & MUSIC <br>
-CURATED <br>
-INDEX 2026
+<span class="active"></span><span></span><span></span><span></span><span></span>
 </div>
 <div class="scroll-arrow-box"><span>↓</span></div>
 </div>
@@ -705,14 +691,14 @@ INDEX 2026
 
 <div class="marquee-wrap">
 <div class="marquee-track">
-<span class="marquee-accent">001 //</span> MOVIE & MUSIC RECOMMENDATION SYSTEM &nbsp;—&nbsp;
-4,800 FILMS &nbsp;—&nbsp; 10,000 TRACKS &nbsp;—&nbsp;
-<span class="marquee-accent">CURATED FOR YOUR TASTE</span> &nbsp;—&nbsp;
-HOVER ANY CARD FOR COLOR &nbsp;—&nbsp;
-<span class="marquee-accent">001 //</span> MOVIE & MUSIC RECOMMENDATION SYSTEM &nbsp;—&nbsp;
-4,800 FILMS &nbsp;—&nbsp; 10,000 TRACKS &nbsp;—&nbsp;
-<span class="marquee-accent">CURATED FOR YOUR TASTE</span> &nbsp;—&nbsp;
-HOVER ANY CARD FOR COLOR &nbsp;—&nbsp;
+<span class="marquee-strong">001 //</span> MOVIE & MUSIC RECOMMENDATION SYSTEM &nbsp;·&nbsp;
+4,800 FILMS &nbsp;·&nbsp; 10,000 TRACKS &nbsp;·&nbsp;
+<span class="marquee-strong">CURATED FOR YOUR TASTE</span> &nbsp;·&nbsp;
+HOVER ANY CARD FOR COLOR &nbsp;·&nbsp;
+<span class="marquee-strong">001 //</span> MOVIE & MUSIC RECOMMENDATION SYSTEM &nbsp;·&nbsp;
+4,800 FILMS &nbsp;·&nbsp; 10,000 TRACKS &nbsp;·&nbsp;
+<span class="marquee-strong">CURATED FOR YOUR TASTE</span> &nbsp;·&nbsp;
+HOVER ANY CARD FOR COLOR &nbsp;·&nbsp;
 </div>
 </div>
 """, unsafe_allow_html=True)
@@ -879,7 +865,7 @@ if mode == "Movies":
 <div class="editorial-card">
 <div class="card-index-strip">
 <span>0{idx+1} // {year}</span>
-<span class="match-pill-orange">{match_pct}% MATCH</span>
+<span class="match-pill-mono">{match_pct}% MATCH</span>
 </div>
 <div class="media-frame poster-ratio">
 {art_html}
@@ -931,7 +917,7 @@ else:
 <div class="editorial-card">
 <div class="card-index-strip">
 <span>0{idx+1} // {song["track_genre"].upper()}</span>
-<span class="match-pill-orange">{match_pct}% MATCH</span>
+<span class="match-pill-mono">{match_pct}% MATCH</span>
 </div>
 <div class="media-frame album-ratio">
 {art_html}
