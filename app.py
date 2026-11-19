@@ -29,7 +29,7 @@ if dark_mode:
     INK_PRIMARY = "#F4F4F2"
     INK_SECONDARY = "#A1A1AA"
     INK_MUTED = "#6E6E73"
-    BORDER_HAIRLINE = "rgba(255, 255, 255, 0.10)"
+    BORDER_HAIRLINE = "rgba(255, 255, 255, 0.11)"
     GRID_LINE = "rgba(255, 255, 255, 0.025)"
     AMBIENT_GLOW = "radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.06) 0%, rgba(18, 18, 20, 0) 68%)"
     MARQUEE_BG = "#121214"
@@ -47,7 +47,7 @@ else:
     INK_PRIMARY = "#111111"
     INK_SECONDARY = "#525252"
     INK_MUTED = "#8A8A8A"
-    BORDER_HAIRLINE = "rgba(17, 17, 17, 0.09)"
+    BORDER_HAIRLINE = "rgba(17, 17, 17, 0.11)"
     GRID_LINE = "rgba(17, 17, 17, 0.025)"
     AMBIENT_GLOW = "radial-gradient(circle at 50% 45%, rgba(17, 17, 17, 0.04) 0%, rgba(255, 255, 255, 0) 68%)"
     MARQUEE_BG = "#FFFFFF"
@@ -59,7 +59,7 @@ else:
     DOT_INACTIVE = "#D4D4D0"
     CARD_SHADOW = "0 18px 38px rgba(17, 17, 17, 0.07)"
 
-# --- 3. ARCHITECTURAL MONOCHROME CSS (DESKTOP + MOBILE RESPONSIVE) ---
+# --- 3. ARCHITECTURAL MONOCHROME CSS (SHARP 90% CORNERS) ---
 st.markdown(f"""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
@@ -143,10 +143,10 @@ div[data-testid="stRadio"] label p {{
     text-transform: uppercase !important;
 }}
 
-/* Selectbox & Dropdown Menu Theme Sync */
+/* Selectbox & Dropdown Menu Theme Sync (Sharp Corners) */
 div[data-baseweb="select"] > div {{
     background-color: var(--surface-card) !important;
-    border-radius: 10px !important;
+    border-radius: 2px !important;
     border: 1px solid var(--border-hairline) !important;
     color: var(--ink-primary) !important;
 }}
@@ -163,7 +163,7 @@ div[data-baseweb="popover"],
 ul[data-baseweb="menu"] {{
     background-color: var(--surface-card) !important;
     border: 1px solid var(--border-hairline) !important;
-    border-radius: 10px !important;
+    border-radius: 2px !important;
 }}
 ul[data-baseweb="menu"] li {{
     color: var(--ink-primary) !important;
@@ -175,12 +175,12 @@ ul[data-baseweb="menu"] li[aria-selected="true"] {{
     color: {BTN_FG} !important;
 }}
 
-/* Minimalist Buttons */
+/* Minimalist Sharp Buttons */
 div.stButton > button {{
     background-color: {BTN_BG} !important;
     color: {BTN_FG} !important;
     border: 1px solid {BTN_BG} !important;
-    border-radius: 10px !important;
+    border-radius: 2px !important;
     font-family: 'Space Mono', monospace !important;
     font-size: 0.74rem !important;
     font-weight: 700 !important;
@@ -218,7 +218,7 @@ div.stButton > button:hover {{
     padding: 0.75rem 1.4rem;
     background: var(--surface-card);
     border: 1px solid var(--border-hairline);
-    border-radius: 14px;
+    border-radius: 3px;
     font-family: 'Space Mono', monospace;
     font-size: 0.7rem;
     letter-spacing: 0.12em;
@@ -234,7 +234,7 @@ div.stButton > button:hover {{
 .geo-mark {{
     width: 22px;
     height: 22px;
-    border-radius: 50%;
+    border-radius: 2px;
     border: 1px solid var(--ink-primary);
     display: inline-flex;
     align-items: center;
@@ -245,7 +245,7 @@ div.stButton > button:hover {{
 }}
 .nav-pill {{
     border: 1px solid var(--border-hairline);
-    border-radius: 999px;
+    border-radius: 2px;
     padding: 4px 12px;
     font-size: 0.66rem;
     color: var(--ink-secondary);
@@ -257,7 +257,7 @@ div.stButton > button:hover {{
     background: var(--surface-card);
     background-image: {AMBIENT_GLOW};
     border: 1px solid var(--border-hairline);
-    border-radius: 22px;
+    border-radius: 4px;
     padding: 3.6rem 3rem 2.6rem 3rem;
     margin-top: 1rem;
     display: flex;
@@ -288,9 +288,9 @@ div.stButton > button:hover {{
 }}
 
 .hero-side-ring {{
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    border-radius: 2px;
     border: 1px solid var(--border-hairline);
     display: flex;
     align-items: center;
@@ -332,7 +332,7 @@ div.stButton > button:hover {{
     margin-top: 1.6rem;
     padding: 0.55rem 1.35rem;
     border: 1px solid var(--border-hairline);
-    border-radius: 999px;
+    border-radius: 2px;
     background: var(--surface-subtle);
     font-family: 'Space Mono', monospace;
     font-size: 0.68rem;
@@ -367,7 +367,7 @@ div.stButton > button:hover {{
 .sys-dots span {{
     width: 5px;
     height: 5px;
-    border-radius: 50%;
+    border-radius: 1px;
     background: {DOT_INACTIVE};
 }}
 .sys-dots span.active {{
@@ -379,7 +379,7 @@ div.stButton > button:hover {{
 .scroll-arrow-box {{
     width: 34px;
     height: 34px;
-    border-radius: 9px;
+    border-radius: 2px;
     border: 1px solid var(--border-hairline);
     background: var(--surface-subtle);
     color: var(--arrow-accent);
@@ -400,7 +400,7 @@ div.stButton > button:hover {{
     background: {MARQUEE_BG};
     color: {MARQUEE_FG};
     border: 1px solid var(--border-hairline);
-    border-radius: 12px;
+    border-radius: 3px;
     padding: 0.65rem 0;
     font-family: 'Space Mono', monospace;
     font-size: 0.68rem;
@@ -447,11 +447,11 @@ div.stButton > button:hover {{
     color: var(--ink-secondary);
 }}
 
-/* Recommendation Cards */
+/* Recommendation Cards (Sharp 90% Corners) */
 .editorial-card {{
     background: var(--surface-card);
     border: 1px solid var(--border-hairline);
-    border-radius: 16px;
+    border-radius: 3px;
     padding: 14px;
     position: relative;
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
@@ -464,7 +464,7 @@ div.stButton > button:hover {{
     position: relative;
     width: 100%;
     overflow: hidden;
-    border-radius: 10px;
+    border-radius: 2px;
     background: #18181B;
     margin-bottom: 12px;
 }}
@@ -531,10 +531,10 @@ div.stButton > button:hover {{
     position: absolute;
     bottom: 8px;
     left: 8px;
-    background: rgba(17, 17, 17, 0.82);
+    background: rgba(17, 17, 17, 0.85);
     backdrop-filter: blur(6px);
     color: var(--arrow-accent);
-    border-radius: 7px;
+    border-radius: 2px;
     font-family: 'Space Mono', monospace;
     font-size: 0.82rem;
     font-weight: 700;
@@ -551,11 +551,12 @@ div.stButton > button:hover {{
     color: var(--ink-muted);
     margin-bottom: 8px;
 }}
+div[data-testid="stMarkdownContainer"] .match-pill-mono,
 .match-pill-mono {{
-    background: {PILL_BG};
-    color: {PILL_FG};
-    border-radius: 999px;
-    padding: 2px 9px;
+    background: {PILL_BG} !important;
+    color: {PILL_FG} !important;
+    border-radius: 2px !important;
+    padding: 2px 8px;
     font-weight: 700;
     font-size: 0.65rem;
 }}
@@ -598,7 +599,7 @@ div.stButton > button:hover {{
     }}
     .sys-hero {{
         padding: 2.2rem 1.2rem 1.5rem 1.2rem;
-        border-radius: 18px;
+        border-radius: 3px;
         margin-top: 0.75rem;
     }}
     .hero-top-tag {{
